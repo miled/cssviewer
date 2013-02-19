@@ -1,0 +1,117 @@
+/*!
+* CSSViewer, A Google Chrome Extension for fellow web developers, web designers, and hobbyists.
+* https://github.com/cssviewer/cssviewer
+* https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce
+*
+* Copyright (c) 2006, 2008 Nicolas Huon 
+*
+* This source code is licensed under the GNU General Public License,
+* Version 2. See the file COPYING for more details.
+*/
+
+/*
+** Common styles
+*/
+
+#CSSViewer_block,
+#CSSViewer_center,
+#CSSViewer_footer,
+.CSSViewer_category,
+span.CSSViewer_property,
+#CSSViewer_block h1,
+#CSSViewer_block h2,
+#CSSViewer_block ul,
+#CSSViewer_block li,
+#CSSViewer_block span
+{
+	font-family:"Lucida sans", "Trebuchet MS", tahoma, arial !important;
+	font-size:10px !important;
+	z-index:9999 !important;
+	padding:0 !important;
+	margin:0 !important;
+	text-indent:0px !important;
+	text-align:left !important;
+	background:transparent !important;
+	visibility: visible !important;
+	width:auto !important;
+	height:auto !important;
+}
+
+#CSSViewer_block
+{
+	display:none;
+	min-width:332px !important;
+	font-size:10px !important;
+	color:#555 !important;
+	position:absolute !important;
+}
+
+#CSSViewer_block h1
+{
+	color:#fff !important;
+	font-size:12px !important;
+	text-transform:none !important;
+	text-align:center !important;
+	width:332px !important;
+	display:block !important; 
+	background:url("chrome-extension://__MSG_@@extension_id__/img/header.png") !important;
+	padding:30px 0 10px 0 !important;
+	
+	overflow:hidden !important;
+}
+
+#CSSViewer_center
+{
+	padding:10px 32px 0 32px !important;
+	overflow:hidden !important;
+	background:url("chrome-extension://__MSG_@@extension_id__/img/body.png") repeat-y !important;
+}
+
+#CSSViewer_footer
+{
+	padding-top:5px !important;
+	color:#CCC !important;
+	text-align:center !important;
+	width:332px !important;
+	height:30px !important;
+	display:block !important;
+	background:url("chrome-extension://__MSG_@@extension_id__/img/footer.png") !important;
+	
+	color:#000000 !important;
+	font-weight: bold !important; 
+}
+
+.CSSViewer_category
+{
+	background:url("chrome-extension://__MSG_@@extension_id__/img/list.png") no-repeat top left !important;
+	padding:0 5px !important;
+}
+
+#CSSViewer_block h2
+{
+	padding-top:6px !important;
+	color:#BEEA71 !important;
+	font-size:13px !important;
+	text-align:left !important;
+	letter-spacing:-0.5px !important;
+}
+
+#CSSViewer_block ul
+{
+	padding:5px 5px 10px 5px !important;
+	list-style:none !important;
+}
+
+#CSSViewer_block li
+{
+	background:url("chrome-extension://__MSG_@@extension_id__/img/bullet.png") no-repeat left center !important;
+	padding-left:10px !important;
+}
+
+
+#CSSViewer_block span.CSSViewer_property
+{
+	color:#888 !important;
+	float:left !important;
+	width:130px !important; 
+}
