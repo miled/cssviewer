@@ -13,8 +13,8 @@
 //    1. Make the initial code more readable 
 //    2. Comment the initial code
 //    3. Fix issues if any
-//    4. Add new feautures (feasible and useful ones)
-//    5. Make a new branch and start refactoring the entire code
+//    4. Add new features (feasible and useful ones)
+//    5. Make a new branch and start re-factoring the entire code
 
 /*
 ** Globals
@@ -841,9 +841,14 @@ function cssViewerInsertMessage( msg )
 	oNewP.style.zIndex          = '100';
 	oNewP.style.padding         = '3px';
 
-	var beforeMe = document.getElementsByTagName("body");
-
-	document.body.insertBefore(oNewP, beforeMe);
+	// hot fix 
+	// https://github.com/miled/cssviewer/issues/5
+	try{
+		var beforeMe = document.getElementsByTagName("body");
+		document.body.insertBefore( oNewP, beforeMe[0] );
+	} catch(err) {
+		// console.log( "CSSVIEWER::ERR document.body not found" ); // keep quiet 
+	}
 }
 
 /*
