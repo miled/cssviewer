@@ -1,6 +1,7 @@
 /*!
 * CSSViewer, A Google Chrome Extension for fellow web developers, web designers, and hobbyists.
-* https://github.com/cssviewer/cssviewer
+*
+* https://github.com/miled/cssviewer
 * https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce
 *
 * Copyright (c) 2006, 2008 Nicolas Huon 
@@ -19,6 +20,10 @@
 /*
 ** Globals
 */
+
+var CSSViewer_element
+
+var CSSViewer_element_cssDefinition
 
 var CSSViewer_container
 
@@ -227,7 +232,7 @@ function RGBToHex(str)
 		hexStr = "#FFFFFF";
 	}
 	
-	hexStr = '<span style="border: 1px solid #000000 !important;width: 1ex !important;height: 1ex !important;display: inline-block !important;background-color:'+ hexStr +' !important;"></span> ' + hexStr;
+	hexStr = '<span style="border: 1px solid #000000 !important;width: 8px !important;height: 8px !important;display: inline-block !important;background-color:'+ hexStr +' !important;"></span> ' + hexStr;
 
 	return hexStr;
 }
@@ -252,7 +257,7 @@ function RemoveExtraFloat(nb)
 }
 
 /*
-** CSSFunc
+* CSSFunc
 */
 
 function GetCSSProperty(element, property)
@@ -536,6 +541,10 @@ function CSSViewerMouseOver(e)
 	var document = GetCurrentDocument();
 	var block = document.getElementById('CSSViewer_block');
 
+	if( ! block ){
+		return;
+	}
+
 	block.firstChild.innerHTML = '&lt;' + this.tagName + '&gt;' + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className);
 
 	// Outline element
@@ -555,11 +564,50 @@ function CSSViewerMouseOver(e)
 	UpdateMisc(element);
 	UpdateEffects(element);
 
-	// console.log( element.cssText ); //< debug the hovred el css
+	CSSViewer_element = this;
 
 	cssViewerRemoveElement("cssViewerInsertMessage");
 
 	e.stopPropagation();
+
+	// generate simple css definition
+	CSSViewer_element_cssDefinition = this.tagName.toLowerCase() + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className) + " {\n";
+
+	CSSViewer_element_cssDefinition += "\t/* Font & Text */\n"; 
+	for (var i = 0; i < CSSViewer_pFont.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pFont[i] + ': ' + element.getPropertyValue( CSSViewer_pFont[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "\n\t/* Color & Background */\n";
+	for (var i = 0; i < CSSViewer_pColorBg.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pColorBg[i] + ': ' + element.getPropertyValue( CSSViewer_pColorBg[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "\n\t/* Box */\n";
+	for (var i = 0; i < CSSViewer_pBox.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pBox[i] + ': ' + element.getPropertyValue( CSSViewer_pBox[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "\n\t/* Positioning */\n";
+	for (var i = 0; i < CSSViewer_pPositioning.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pPositioning[i] + ': ' + element.getPropertyValue( CSSViewer_pPositioning[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "\n\t/* List */\n";
+	for (var i = 0; i < CSSViewer_pList.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pList[i] + ': ' + element.getPropertyValue( CSSViewer_pList[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "\n\t/* Table */\n";
+	for (var i = 0; i < CSSViewer_pTable.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pTable[i] + ': ' + element.getPropertyValue( CSSViewer_pTable[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "\n\t/* Miscellaneous */\n";
+	for (var i = 0; i < CSSViewer_pMisc.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pMisc[i] + ': ' + element.getPropertyValue( CSSViewer_pMisc[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "\n\t/* Effects */\n"; 
+	for (var i = 0; i < CSSViewer_pEffect.length; i++)
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pEffect[i] + ': ' + element.getPropertyValue( CSSViewer_pEffect[i] ) + ";\n";
+
+	CSSViewer_element_cssDefinition += "}";
+
+	// console.log( element.cssText ); //< debug the hovered el css
 }
 
 function CSSViewerMouseOut(e)
@@ -574,6 +622,10 @@ function CSSViewerMouseMove(e)
 	var document = GetCurrentDocument();
 	var block = document.getElementById('CSSViewer_block');
 
+	if( ! block ){
+		return;
+	}
+
 	block.style.display = 'block';
 	
 	var pageWidth = window.innerWidth;
@@ -582,26 +634,44 @@ function CSSViewerMouseMove(e)
 	var blockHeight = document.defaultView.getComputedStyle(block, null).getPropertyValue('height');
 
 	blockHeight = blockHeight.substr(0, blockHeight.length - 2) * 1;
-	
+
 	if ((e.pageX + blockWidth) > pageWidth) {
 		if ((e.pageX - blockWidth - 10) > 0)
-			block.style.left = e.pageX - blockWidth - 10 + 'px';
+			block.style.left = e.pageX - blockWidth - 40 + 'px';
 		else
 			block.style.left = 0 + 'px';
 	}
 	else
-		block.style.left = (e.pageX + 10) + 'px';
+		block.style.left = (e.pageX + 20) + 'px';
 
 	if ((e.pageY + blockHeight) > pageHeight) {
 		if ((e.pageY - blockHeight - 10) > 0)
-			block.style.top = e.pageY - blockHeight - 10 + 'px';
+			block.style.top = e.pageY - blockHeight - 20 + 'px';
 		else
 			block.style.top = 0 + 'px';
 	}
 	else
-		block.style.top = (e.pageY + 10) + 'px';
+		block.style.top = (e.pageY + 20) + 'px';
+
+	// adapt block top to screen offset
+	inView = CSSViewerIsElementInViewport(block);
+
+	if( ! inView )
+		block.style.top = ( window.pageYOffset  + 20 ) + 'px';
 
 	e.stopPropagation();
+}
+
+// http://stackoverflow.com/a/7557433
+function CSSViewerIsElementInViewport(el) {
+    var rect = el.getBoundingClientRect();
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
 }
 
 /*
@@ -629,7 +699,7 @@ function CSSViewer()
 			var center = document.createElement('div');
 
 			center.id = 'CSSViewer_center';
-			
+
 			for (var cat in CSSViewer_categories) {
 				var div = document.createElement('div');
 
@@ -672,8 +742,8 @@ function CSSViewer()
 
 			footer.id = 'CSSViewer_footer';
 
-			//< I know, its annoying.. sorry about that. it just to spread the word for now, and will be removed :) 
-			footer.appendChild(document.createTextNode('http://github.com/cssviewer/cssviewer')); 
+			//< 
+			footer.appendChild( document.createTextNode('CSSViewer 1.6') ); 
 			block.appendChild(footer);
 		}
 		
@@ -841,14 +911,13 @@ function cssViewerInsertMessage( msg )
 	oNewP.style.zIndex          = '100';
 	oNewP.style.padding         = '3px';
 
-	// hot fix 
 	// https://github.com/miled/cssviewer/issues/5
-	try{
-		var beforeMe = document.getElementsByTagName("body");
-		document.body.insertBefore( oNewP, beforeMe[0] );
-	} catch(err) {
-		// console.log( "CSSVIEWER::ERR document.body not found" ); // keep quiet 
-	}
+	// https://github.com/miled/cssviewer/issues/6
+	// var beforeMe = document.getElementsByTagName("body");
+	// document.body.insertBefore( oNewP, beforeMe[0] );
+
+	// https://github.com/zchee/cssviewer/commit/dad107d27e94aabeb6e11b935ad28c4ff251f895
+	document.body.appendChild(oNewP);
 }
 
 /*
@@ -864,13 +933,29 @@ function cssViewerRemoveElement(divid)
 }
 
 /*
+* Copy current element css to chrome console
+*/
+function cssViewerCopyCssToConsole(type)
+{   
+	if( 'el' == type ) return console.log( CSSViewer_element );
+	if( 'id' == type ) return console.log( CSSViewer_element.id );
+	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
+	if( 'className' == type ) return console.log( CSSViewer_element.className );
+	if( 'style' == type ) return console.log( CSSViewer_element.style ); 
+	if( 'cssText' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null).cssText );
+	if( 'getComputedStyle' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null) );
+	if( 'simpleCssDefinition' == type ) return console.log( CSSViewer_element_cssDefinition );
+}
+
+/*
 * CSSViewer entry-point
 */
 cssViewer = new CSSViewer();
 
-if ( cssViewer.IsEnabled()){
+if ( cssViewer.IsEnabled() ){
 	cssViewer.Disable();  
 }
 else{
 	cssViewer.Enable(); 
 }
+

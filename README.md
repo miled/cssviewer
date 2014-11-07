@@ -34,6 +34,8 @@ Known Issues
 Changelog
 ---------
 
+*  1.6 - 11/2014 - Add inspect element to menu. Add generate css definition. Fix few issues with auto-positioning. reFix an issue with chrome/38.
+*  1.5 - 10/2015 - Hotfix an issue with Chrome/38.0.2125.101.
 *  1.4 - 02/2013: A bunch of minor changes in order to release CSSViewer as an open source project.
 *  1.3 - 08/2011: Support some CSS3 properties under the "Effects' category.
 *  1.2 - 07/2011: Fix some minor bugs.

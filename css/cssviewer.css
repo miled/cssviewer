@@ -10,7 +10,7 @@
 */
 
 /*
-** Common styles
+** Common styles. Almost everything is !important; here p
 */
 
 #CSSViewer_block,
@@ -24,7 +24,7 @@ span.CSSViewer_property,
 #CSSViewer_block li,
 #CSSViewer_block span
 {
-	font-family:"Lucida sans", "Trebuchet MS", tahoma, arial !important;
+	font-family:"Lucida sans", helvetica, sans-serif !important;
 	font-size:10px !important;
 	z-index:9999 !important;
 	padding:0 !important;
@@ -35,6 +35,7 @@ span.CSSViewer_property,
 	visibility: visible !important;
 	width:auto !important;
 	height:auto !important;
+	line-height: 20px; 
 }
 
 #CSSViewer_block
@@ -58,6 +59,7 @@ span.CSSViewer_property,
 	padding:30px 0 10px 0 !important;
 	margin:5% auto;
 	overflow:hidden !important;
+	line-height: 5px;
 }
 
 #CSSViewer_center
@@ -69,16 +71,13 @@ span.CSSViewer_property,
 
 #CSSViewer_footer
 {
-	padding-top:5px !important;
-	color:#CCC !important;
+	padding-top:5px;
+	color:#555 !important;
 	text-align:center !important;
 	width:332px !important;
 	height:30px !important;
 	display:block !important;
 	background:url("chrome-extension://__MSG_@@extension_id__/img/footer.png") !important;
-	
-	color:#000000 !important;
-	font-weight: bold !important; 
 }
 
 .CSSViewer_category
@@ -90,8 +89,8 @@ span.CSSViewer_property,
 #CSSViewer_block h2
 {
 	padding-top:6px !important;
-	color:#BEEA71 !important;
-	font-size:13px !important;
+	color:#6a8e46 !important;
+	font-size:12px !important;
 	text-align:left !important;
 	letter-spacing:-0.5px !important;
 }
@@ -100,12 +99,13 @@ span.CSSViewer_property,
 {
 	padding:5px 5px 10px 5px !important;
 	list-style:none !important;
+	width:282px !important;
 }
 
 #CSSViewer_block li
 {
 	background:url("chrome-extension://__MSG_@@extension_id__/img/bullet.png") no-repeat left center !important;
-	padding-left:10px !important;
+	padding-left:10px !important; 
 }
 
 
@@ -113,5 +113,7 @@ span.CSSViewer_property,
 {
 	color:#888 !important;
 	float:left !important;
-	width:130px !important; 
+	width:100px !important; 
+	display:block !important; 
+	overflow:hidden !important;
 }
