@@ -27,6 +27,8 @@ var CSSViewer_element_cssDefinition
 
 var CSSViewer_container
 
+var CSSViewer_current_element
+
 // CSS Properties
 var CSSViewer_pFont = new Array(
 	'font-family', 
@@ -550,6 +552,7 @@ function CSSViewerMouseOver(e)
 	// Outline element
 	if (this.tagName != 'body') {
 		this.style.outline = '1px dashed #f00';
+		CSSViewer_current_element = this;
 	}
 	
 	// Updating CSS properties
@@ -953,7 +956,9 @@ function cssViewerCopyCssToConsole(type)
 function closeCssViewer(e) {
 	// Close the css viewer if the cssViewer is enabled.
 	if ( e.keyCode === 27 && cssViewer.IsEnabled() ){
-		cssViewer.Disable();  
+		// Remove the red outline
+		CSSViewer_current_element.style.outline = '';
+		cssViewer.Disable();
 	}	
 }
 
@@ -970,5 +975,5 @@ else{
 	cssViewer.Enable(); 
 }
 
+// Set event handler for esc key - To close the CssViewer popup
 document.onkeydown = closeCssViewer;
-
