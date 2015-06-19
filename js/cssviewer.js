@@ -950,7 +950,7 @@ function cssViewerCopyCssToConsole(type)
 /*
  *  Close css viewer on clicking 'esc' key
  */
-funtion closeCssViewer(e) {
+function closeCssViewer(e) {
 	// Close the css viewer if the cssViewer is enabled.
 	if ( e.keyCode === 27 && cssViewer.IsEnabled() ){
 		cssViewer.Disable();  
