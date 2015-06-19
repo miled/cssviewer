@@ -948,6 +948,17 @@ function cssViewerCopyCssToConsole(type)
 }
 
 /*
+ *  Close css viewer on clicking 'esc' key
+ */
+funtion closeCssViewer(e) {
+	// Close the css viewer if the cssViewer is enabled.
+	if ( e.keyCode === 27 && cssViewer.IsEnabled() ){
+		cssViewer.Disable();  
+	}	
+}
+
+
+/*
 * CSSViewer entry-point
 */
 cssViewer = new CSSViewer();
@@ -958,4 +969,6 @@ if ( cssViewer.IsEnabled() ){
 else{
 	cssViewer.Enable(); 
 }
+
+document.onkeydown = closeCssViewer;
 
