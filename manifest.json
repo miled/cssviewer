@@ -33,7 +33,7 @@
 		"tabs",
 		"http://*/*", 
 		"https://*/*", 
-    "file://*/*", 
+		"file://*/*", 
 		"contextMenus"
 	] 
 }
