@@ -778,6 +778,9 @@ function CSSViewer()
 		return elements;
 	}
 	
+	// Add bool for knowing all elements having event listeners or not
+	this.haveEventListeners = false;
+
 	// Add event listeners for all elements in the current document
 	this.AddEventListeners = function()
 	{
@@ -789,6 +792,7 @@ function CSSViewer()
 			elements[i].addEventListener("mouseout", CSSViewerMouseOut, false);
 			elements[i].addEventListener("mousemove", CSSViewerMouseMove, false);
 		}	
+		this.haveEventListeners = true;
 	}
 	
 	// Remove event listeners for all elements in the current document
@@ -802,6 +806,7 @@ function CSSViewer()
 			elements[i].removeEventListener("mouseout", CSSViewerMouseOut, false);
 			elements[i].removeEventListener("mousemove", CSSViewerMouseMove, false);
 		}	
+		this.haveEventListeners = false;
 	}
 
 	// Set the title of the block
@@ -897,6 +902,40 @@ CSSViewer.prototype.Disable = function()
 }
 
 /*
+* Freeze CSSViewer
+*/
+CSSViewer.prototype.Freeze = function()
+{
+	var document = GetCurrentDocument();
+	var block = document.getElementById('CSSViewer_block');
+	if ( block && this.haveEventListeners ) {
+		this.RemoveEventListeners();
+
+		return true;
+	}
+
+	return false;
+}
+
+/*
+* Unfreeze CSSViewer
+*/
+CSSViewer.prototype.Unfreeze = function()
+{
+	var document = GetCurrentDocument();
+	var block = document.getElementById('CSSViewer_block');
+	if ( block && !this.haveEventListeners ) {
+		// Remove the red outline
+		CSSViewer_current_element.style.outline = '';
+		this.AddEventListeners();
+
+		return true;
+	}
+
+	return false;
+}
+
+/*
 * Display the notification message
 */
 function cssViewerInsertMessage( msg )
@@ -952,14 +991,24 @@ function cssViewerCopyCssToConsole(type)
 
 /*
  *  Close css viewer on clicking 'esc' key
+ *  Freeze css viewer on clicking 'f' key
  */
-function closeCssViewer(e) {
+function CssViewerKeyMap(e) {
 	// Close the css viewer if the cssViewer is enabled.
 	if ( e.keyCode === 27 && cssViewer.IsEnabled() ){
 		// Remove the red outline
 		CSSViewer_current_element.style.outline = '';
 		cssViewer.Disable();
-	}	
+	}
+	// Freeze or Unfreeze the css viewer if the cssViewer is enabled
+	if ( e.keyCode === 70 && cssViewer.IsEnabled() ){
+		if ( cssViewer.haveEventListeners ){
+			cssViewer.Freeze();
+		}
+		else {
+			cssViewer.Unfreeze();
+		}
+	}
 }
 
 
@@ -975,5 +1024,5 @@ else{
 	cssViewer.Enable(); 
 }
 
-// Set event handler for esc key - To close the CssViewer popup
-document.onkeydown = closeCssViewer;
+// Set event handler for the CssViewer 
+document.onkeydown = CssViewerKeyMap;
