@@ -1003,6 +1003,9 @@ function CssViewerKeyMap(e) {
 		CSSViewer_current_element.style.outline = '';
 		cssViewer.Disable();
 	}
+	
+	if( e.altKey || e.ctrlKey )
+		return;
 
 	// f: Freeze or Unfreeze the css viewer if the cssViewer is enabled
 	if ( e.keyCode === 70 ){
