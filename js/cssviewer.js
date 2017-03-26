@@ -746,7 +746,7 @@ function CSSViewer()
 			footer.id = 'CSSViewer_footer';
 
 			//< 
-			footer.appendChild( document.createTextNode('CSSViewer 1.6') ); 
+			footer.appendChild( document.createTextNode('CSSViewer 1.7. keys: [f] Un/Freeze. [c] Css. [Esc] Close.') ); 
 			block.appendChild(footer);
 		}
 		
@@ -990,24 +990,34 @@ function cssViewerCopyCssToConsole(type)
 }
 
 /*
- *  Close css viewer on clicking 'esc' key
- *  Freeze css viewer on clicking 'f' key
- */
+*  Close css viewer on clicking 'esc' key
+*  Freeze css viewer on clicking 'f' key
+*/
 function CssViewerKeyMap(e) {
-	// Close the css viewer if the cssViewer is enabled.
-	if ( e.keyCode === 27 && cssViewer.IsEnabled() ){
+	if( ! cssViewer.IsEnabled() )
+		return;
+
+	// ESC: Close the css viewer if the cssViewer is enabled.
+	if ( e.keyCode === 27 ){
 		// Remove the red outline
 		CSSViewer_current_element.style.outline = '';
 		cssViewer.Disable();
 	}
-	// Freeze or Unfreeze the css viewer if the cssViewer is enabled
-	if ( e.keyCode === 70 && cssViewer.IsEnabled() ){
+
+	// f: Freeze or Unfreeze the css viewer if the cssViewer is enabled
+	if ( e.keyCode === 70 ){
 		if ( cssViewer.haveEventListeners ){
 			cssViewer.Freeze();
 		}
 		else {
 			cssViewer.Unfreeze();
 		}
+	}
+
+	// c: Show code css for selected element. 
+	// window.prompt should suffice for now.
+	if ( e.keyCode === 67 ){
+		window.prompt("Simple Css Definition :\n\nYou may copy the code below then hit escape to continue.", CSSViewer_element_cssDefinition);
 	}
 }
 
