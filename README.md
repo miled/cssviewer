@@ -1,5 +1,5 @@
-CSSViewer 1.4
-=============
+CSSViewer Chrome  Extension 1.7
+===============================
 
 **CSSViewer** is a simple CSS property viewer for Google chrome originally made by **Nicolas Huon** as a [FireFox addon](https://addons.mozilla.org/en-US/firefox/addon/2104).
 
