@@ -53,13 +53,12 @@ span.CSSViewer_property,
 	font-size:12px !important;
 	text-transform:none !important;
 	text-align:center !important;
-	width:332px !important;
+	width:322px !important;
 	display:block !important; 
 	background:url("chrome-extension://__MSG_@@extension_id__/img/header.png") !important;
-	padding:30px 0 10px 0 !important;
+	padding:30px 10px 5px 10px !important;
 	margin:5% auto;
-	overflow:hidden !important;
-	line-height: 5px;
+	line-height: 10px;
 }
 
 #CSSViewer_center
