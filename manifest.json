@@ -3,7 +3,7 @@
 	"manifest_version": 2,
 	"version": "1.7",
 
-	"description": "A simple CSS property viewer.", 
+	"description": "A simple CSS property viewer.",
 
 	"icons": {
 		"16": "img/16.png",
@@ -31,9 +31,19 @@
 
 	"permissions": [
 		"tabs",
-		"http://*/*", 
-		"https://*/*", 
-		"file://*/*", 
+		"http://*/*",
+		"https://*/*",
+		"file://*/*",
 		"contextMenus"
-	] 
+	],
+	"commands": {
+		"_execute_browser_action": {
+			"suggested_key": {
+				"windows": "Ctrl+Shift+S",
+				"mac": "Command+Shift+S",
+				"chromeos": "Ctrl+Shift+S",
+				"linux": "Ctrl+Shift+S"
+			}
+		}
+	}
 }
