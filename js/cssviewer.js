@@ -4,14 +4,14 @@
 * https://github.com/miled/cssviewer
 * https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce
 *
-* Copyright (c) 2006, 2008 Nicolas Huon 
+* Copyright (c) 2006, 2008 Nicolas Huon
 *
 * This source code is licensed under the GNU General Public License,
 * Version 2. See the file COPYING for more details.
 */
 
 // Roadmap/ToDos
-//    1. Make the initial code more readable 
+//    1. Make the initial code more readable
 //    2. Comment the initial code
 //    3. Fix issues if any
 //    4. Add new features (feasible and useful ones)
@@ -31,80 +31,65 @@ var CSSViewer_current_element
 
 // CSS Properties
 var CSSViewer_pFont = new Array(
-	'font-family', 
-	'font-size', 
-	'font-style', 
-	'font-variant', 
-	'font-weight', 
-	'letter-spacing', 
-	'line-height', 
-	'text-decoration', 
-	'text-align', 
-	'text-indent', 
-	'text-transform', 
-	'vertical-align', 
-	'white-space', 
-	'word-spacing'
-);
-
-var CSSViewer_pColorBg = new Array(
-	'background-attachment', 
-	'background-color', 
+	'font-family',
+	'font-size',
+	'font-style',
+	'font-variant',
+	'font-weight',
+	'letter-spacing',
+	'line-height',
+	'text-decoration',
+	'text-align',
+	'text-indent',
+	'text-transform',
+	'vertical-align',
+	'white-space',
+	'word-spacing',
+	'background-attachment',
+	'background-color',
 	'background-image',
 	'background-position',
 	'background-repeat',
-	'color'
-);
-
-var CSSViewer_pBox = new Array(
+	'color',
+	'background-attachment',
+	'background-color',
+	'background-image',
+	'background-position',
+	'background-repeat',
+	'color',
 	'height',
 	'width',
 	'border',
 	'border-top',
 	'border-right',
-	'border-bottom', 
+	'border-bottom',
 	'border-left',
 	'margin',
 	'padding',
 	'max-height',
 	'min-height',
 	'max-width',
-	'min-width'
-);
-
-var CSSViewer_pPositioning = new Array(
-	'position', 
-	'top', 
-	'bottom', 
-	'right', 
-	'left', 
-	'float', 
-	'display', 
-	'clear', 
-	'z-index'
-);
-
-var CSSViewer_pList = new Array(
-	'list-style-image', 
-	'list-style-type', 
-	'list-style-position'
-);
-
-var CSSViewer_pTable = new Array(
+	'min-width',
+	'position',
+	'top',
+	'bottom',
+	'right',
+	'left',
+	'float',
+	'display',
+	'clear',
+	'z-index',
+	'list-style-image',
+	'list-style-type',
+	'list-style-position',
 	'border-collapse',
 	'border-spacing',
 	'caption-side',
 	'empty-cells',
-	'table-layout'
-);
-
-var CSSViewer_pMisc = new Array(
-	'overflow', 
-	'cursor', 
-	'visibility'
-);
-
-var CSSViewer_pEffect = new Array(
+	'table-layout',
+	'overflow',
+	'cursor',
+	'visibility',
 	'transform',
 	'transition',
 	'outline',
@@ -122,26 +107,12 @@ var CSSViewer_pEffect = new Array(
 );
 
 // CSS Property categories
-var CSSViewer_categories = { 
-	'pFontText'    : CSSViewer_pFont, 
-	'pColorBg'     : CSSViewer_pColorBg, 
-	'pBox'         : CSSViewer_pBox, 
-	'pPositioning' : CSSViewer_pPositioning, 
-	'pList'        : CSSViewer_pList, 
-	'pTable'       : CSSViewer_pTable, 
-	'pMisc'        : CSSViewer_pMisc, 
-	'pEffect'      : CSSViewer_pEffect 
+var CSSViewer_categories = {
+	'pFontText'    : CSSViewer_pFont
 };
 
-var CSSViewer_categoriesTitle = { 
-	'pFontText'    : 'Font & Text', 
-	'pColorBg'     : 'Color & Background', 
-	'pBox'         : 'Box', 
-	'pPositioning' : 'Positioning', 
-	'pList'        : 'List', 
-	'pTable'       : 'Table', 
-	'pMisc'        : 'Miscellaneous', 
-	'pEffect'      : 'Effects' 
+var CSSViewer_categoriesTitle = {
+	'pFontText'    : 'Font & Text'
 };
 
 // Table tagnames
@@ -212,7 +183,7 @@ function DecToHex(nb)
 	nbHexa += CSSViewer_hexa[Math.floor(nb / 16)];
 	nb = nb % 16;
 	nbHexa += CSSViewer_hexa[nb];
-	
+
 	return nbHexa;
 }
 
@@ -224,16 +195,16 @@ function RGBToHex(str)
 	str = str.slice(start, end);
 
 	var hexValues = str.split(', ');
-	var hexStr = '#'; 
+	var hexStr = '#';
 
 	for (var i = 0; i < hexValues.length; i++) {
 		hexStr += DecToHex(hexValues[i]);
 	}
-	
+
 	if( hexStr == "#00000000" ){
 		hexStr = "#FFFFFF";
 	}
-	
+
 	hexStr = '<span style="border: 1px solid #000000 !important;width: 8px !important;height: 8px !important;display: inline-block !important;background-color:'+ hexStr +' !important;"></span> ' + hexStr;
 
 	return hexStr;
@@ -247,7 +218,7 @@ function GetFileName(str)
 	str = str.slice(start, end);
 
 	var path = str.split('/');
-	
+
 	return path[path.length - 1];
 }
 
@@ -267,12 +238,27 @@ function GetCSSProperty(element, property)
 	return element.getPropertyValue(property);
 }
 
+function SetCSSProperty_var(property, value)
+{
+	var document = GetCurrentDocument();
+	var li = document.getElementById('CSSViewer_' + property);
+	// console.log(value)
+
+	// if(value != "" || value != null){
+		li.lastChild.innerHTML = " : " + value;
+		li.style.display = 'block';
+	// }else{
+		// li.style.display = 'none';
+	// }
+}
+
 function SetCSSProperty(element, property)
 {
 	var document = GetCurrentDocument();
 	var li = document.getElementById('CSSViewer_' + property);
 
 	li.lastChild.innerHTML = " : " + element.getPropertyValue(property);
+
 }
 
 function SetCSSPropertyIf(element, property, condition)
@@ -282,7 +268,7 @@ function SetCSSPropertyIf(element, property, condition)
 
 	if (condition) {
 		li.lastChild.innerHTML = " : " + element.getPropertyValue(property);
-		li.style.display = 'block';
+		li.style.display = 'none';
 
 		return 1;
 	}
@@ -299,7 +285,7 @@ function SetCSSPropertyValue(element, property, value)
 	var li = document.getElementById('CSSViewer_' + property);
 
 	li.lastChild.innerHTML = " : " + value;
-	li.style.display = 'block';
+	li.style.display = 'none';
 }
 
 function SetCSSPropertyValueIf(element, property, value, condition)
@@ -309,7 +295,7 @@ function SetCSSPropertyValueIf(element, property, value, condition)
 
 	if (condition) {
 		li.lastChild.innerHTML = " : " + value;
-		li.style.display = 'block';
+		li.style.display = 'none';
 
 		return 1;
 	}
@@ -344,198 +330,172 @@ function ShowCSSCategory(category)
 	div.style.display = 'block';
 }
 
+function getVar(element){
+	var el = element;
+	var cssProperties = window.getMatchedCSSRules(el)[0]
+
+
+	for(let i = 0; i < cssProperties.style.length; i++){
+
+		let w = cssProperties.style.item(i)
+		let value = cssProperties.style.getPropertyValue(w)
+
+		if(value.startsWith('var(')){
+			SetCSSProperty_var(w, value);
+		}
+	}
+
+}
+
 function UpdatefontText(element)
 {
-	// Font
-	SetCSSProperty(element, 'font-family');
-	SetCSSProperty(element, 'font-size');
 
-	SetCSSPropertyIf(element, 'font-weight'    , GetCSSProperty(element, 'font-weight') != '400');
-	SetCSSPropertyIf(element, 'font-variant'   , GetCSSProperty(element, 'font-variant') != 'normal');
-	SetCSSPropertyIf(element, 'font-style'     , GetCSSProperty(element, 'font-style') != 'normal');
-	
-	// Text
-	SetCSSPropertyIf(element, 'letter-spacing' , GetCSSProperty(element, 'letter-spacing') != 'normal');
-	SetCSSPropertyIf(element, 'line-height'    , GetCSSProperty(element, 'line-height') != 'normal');
-	SetCSSPropertyIf(element, 'text-decoration', GetCSSProperty(element, 'text-decoration') != 'none');
-	SetCSSPropertyIf(element, 'text-align'     , GetCSSProperty(element, 'text-align') != 'start');
-	SetCSSPropertyIf(element, 'text-indent'    , GetCSSProperty(element, 'text-indent') != '0px');
-	SetCSSPropertyIf(element, 'text-transform' , GetCSSProperty(element, 'text-transform') != 'none');
-	SetCSSPropertyIf(element, 'vertical-align' , GetCSSProperty(element, 'vertical-align') != 'baseline');
-	SetCSSPropertyIf(element, 'white-space'    , GetCSSProperty(element, 'white-space') != 'normal');
-	SetCSSPropertyIf(element, 'word-spacing'   , GetCSSProperty(element, 'word-spacing') != 'normal');
-}
-
-function UpdateColorBg(element)
-{
-	// Color
-	SetCSSPropertyValue(element, 'color', RGBToHex(GetCSSProperty(element, 'color')));
-
-	// Background
-	SetCSSPropertyValueIf(element, 'background-color', RGBToHex(GetCSSProperty(element, 'background-color')), GetCSSProperty(element, 'background-color') != 'transparent');
-	SetCSSPropertyIf(element, 'background-attachment', GetCSSProperty(element, 'background-attachment') != 'scroll');
-	SetCSSPropertyValueIf(element, 'background-image', GetFileName(GetCSSProperty(element, 'background-image')), GetCSSProperty(element, 'background-image') != 'none');
-	SetCSSPropertyIf(element, 'background-position'  , GetCSSProperty(element, 'background-position') != '');
-	SetCSSPropertyIf(element, 'background-repeat'    , GetCSSProperty(element, 'background-repeat') != 'repeat');
-}
-
-function UpdateBox(element)
-{
-	// Width/Height
-	SetCSSPropertyIf(element, 'height', RemoveExtraFloat(GetCSSProperty(element, 'height')) != 'auto');
-	SetCSSPropertyIf(element, 'width', RemoveExtraFloat(GetCSSProperty(element, 'width')) != 'auto');
-
-	// Border
-	var borderTop    = RemoveExtraFloat(GetCSSProperty(element, 'border-top-width')) + ' ' + GetCSSProperty(element, 'border-top-style') + ' ' + RGBToHex(GetCSSProperty(element, 'border-top-color'));
-	var borderBottom = RemoveExtraFloat(GetCSSProperty(element, 'border-bottom-width')) + ' ' + GetCSSProperty(element, 'border-bottom-style') + ' ' + RGBToHex(GetCSSProperty(element, 'border-bottom-color'));
-	var borderRight  = RemoveExtraFloat(GetCSSProperty(element, 'border-right-width')) + ' ' + GetCSSProperty(element, 'border-right-style') + ' ' + RGBToHex(GetCSSProperty(element, 'border-right-color'));
-	var borderLeft   = RemoveExtraFloat(GetCSSProperty(element, 'border-left-width')) + ' ' + GetCSSProperty(element, 'border-left-style') + ' ' + RGBToHex(GetCSSProperty(element, 'border-left-color'));
-
-	if (borderTop == borderBottom && borderBottom == borderRight && borderRight == borderLeft && GetCSSProperty(element, 'border-top-style') != 'none') {
-		SetCSSPropertyValue(element, 'border', borderTop);
-
-		HideCSSProperty('border-top');
-		HideCSSProperty('border-bottom');
-		HideCSSProperty('border-right');
-		HideCSSProperty('border-left');
-	}
-	else {
-		SetCSSPropertyValueIf(element, 'border-top'   , borderTop   , GetCSSProperty(element, 'border-top-style') != 'none');
-		SetCSSPropertyValueIf(element, 'border-bottom', borderBottom, GetCSSProperty(element, 'border-bottom-style') != 'none');
-		SetCSSPropertyValueIf(element, 'border-right' , borderRight , GetCSSProperty(element, 'border-right-style') != 'none');
-		SetCSSPropertyValueIf(element, 'border-left'  , borderLeft  , GetCSSProperty(element, 'border-left-style') != 'none');
-
-		HideCSSProperty('border');
-	}
-	
-	// Margin
-	var marginTop    = RemoveExtraFloat(GetCSSProperty(element, 'margin-top'));
-	var marginBottom = RemoveExtraFloat(GetCSSProperty(element, 'margin-bottom'));
-	var marginRight  = RemoveExtraFloat(GetCSSProperty(element, 'margin-right'));
-	var marginLeft   = RemoveExtraFloat(GetCSSProperty(element, 'margin-left'));
-	var margin       = (marginTop == '0px' ? '0' : marginTop) + ' ' + (marginRight == '0px' ? '0' : marginRight) + ' '  + (marginBottom == '0px' ? '0' : marginBottom) + ' '  + (marginLeft == '0px' ? '0' : marginLeft);
-
-	SetCSSPropertyValueIf(element, 'margin', margin, margin != '0 0 0 0');
-
-	// padding
-	var paddingTop    = RemoveExtraFloat(GetCSSProperty(element, 'padding-top'));
-	var paddingBottom = RemoveExtraFloat(GetCSSProperty(element, 'padding-bottom'));
-	var paddingRight  = RemoveExtraFloat(GetCSSProperty(element, 'padding-right'));
-	var paddingLeft   = RemoveExtraFloat(GetCSSProperty(element, 'padding-left'));
-	var padding       = (paddingTop == '0px' ? '0' : paddingTop) + ' ' + (paddingRight == '0px' ? '0' : paddingRight) + ' '  + (paddingBottom == '0px' ? '0' : paddingBottom) + ' '  + (paddingLeft == '0px' ? '0' : paddingLeft);
-
-	SetCSSPropertyValueIf(element, 'padding', padding, padding != '0 0 0 0');
-
-	// Max/Min Width/Height
-	SetCSSPropertyIf(element, 'min-height', GetCSSProperty(element, 'min-height') != '0px');
-	SetCSSPropertyIf(element, 'max-height', GetCSSProperty(element, 'max-height') != 'none');
-	SetCSSPropertyIf(element, 'min-width' , GetCSSProperty(element, 'min-width') != '0px');
-	SetCSSPropertyIf(element, 'max-width' , GetCSSProperty(element, 'max-width') != 'none');
-}
-
-function UpdatePositioning(element)
-{
-	SetCSSPropertyIf(element, 'position', GetCSSProperty(element, 'position') != 'static');
-	SetCSSPropertyIf(element, 'top'     , GetCSSProperty(element, 'top') != 'auto');
-	SetCSSPropertyIf(element, 'bottom'  , GetCSSProperty(element, 'bottom') != 'auto');
-	SetCSSPropertyIf(element, 'right'   , GetCSSProperty(element, 'right') != 'auto');
-	SetCSSPropertyIf(element, 'left'    , GetCSSProperty(element, 'left') != 'auto');
-	SetCSSPropertyIf(element, 'float'   , GetCSSProperty(element, 'float') != 'none');
-
-	SetCSSProperty(element, 'display');
-
-	SetCSSPropertyIf(element, 'clear'   , GetCSSProperty(element, 'clear') != 'none');
-	SetCSSPropertyIf(element, 'z-index' , GetCSSProperty(element, 'z-index') != 'auto');
-}
-
-function UpdateTable(element, tagName)
-{
-	if (IsInArray(CSSViewer_tableTagNames, tagName)) {
-		var nbProperties = 0;
-
-		nbProperties += SetCSSPropertyIf(element, 'border-collapse', GetCSSProperty(element, 'border-collapse') != 'separate');
-		nbProperties += SetCSSPropertyIf(element, 'border-spacing' , GetCSSProperty(element, 'border-spacing') != '0px 0px');
-		nbProperties += SetCSSPropertyIf(element, 'caption-side'   , GetCSSProperty(element, 'caption-side') != 'top');
-		nbProperties += SetCSSPropertyIf(element, 'empty-cells'    , GetCSSProperty(element, 'empty-cells') != 'show');
-		nbProperties += SetCSSPropertyIf(element, 'table-layout'   , GetCSSProperty(element, 'table-layout') != 'auto');
-
-		if (nbProperties > 0)
-			ShowCSSCategory('pTable');
-		else
-			HideCSSCategory('pTable');
-	}
-	else {
-		HideCSSCategory('pTable');
-	}
-}
-
-function UpdateList(element, tagName)
-{
-	if (IsInArray(CSSViewer_listTagNames, tagName)) {
-		ShowCSSCategory('pList');
-
-		var listStyleImage = GetCSSProperty(element, 'list-style-image');
-
-		if (listStyleImage == 'none') {
-			SetCSSProperty(element, 'list-style-type');
-			HideCSSProperty('list-style-image');
-		}
-		else {
-			SetCSSPropertyValue(element, 'list-style-image', listStyleImage);
-			HideCSSProperty('list-style-type');
-		}
-
-		SetCSSProperty(element, 'list-style-position');
-	}
-	else {
-		HideCSSCategory('pList');
-	}
-}
-
-function UpdateMisc(element)
-{
-	var nbProperties = 0;
-
-	nbProperties += SetCSSPropertyIf(element, 'overflow'  , GetCSSProperty(element, 'overflow') != 'visible');
-	nbProperties += SetCSSPropertyIf(element, 'cursor'    , GetCSSProperty(element, 'cursor') != 'auto');
-	nbProperties += SetCSSPropertyIf(element, 'visibility', GetCSSProperty(element, 'visibility') != 'visible'); 
-
-	if (nbProperties > 0)
-		ShowCSSCategory('pMisc');
-	else
-		HideCSSCategory('pMisc');
-}
-
-function UpdateEffects(element)
-{
-	var nbProperties = 0;
-
-	nbProperties += SetCSSPropertyIf(element, 'transform'                 , GetCSSProperty(element, 'transform') ); 
-	nbProperties += SetCSSPropertyIf(element, 'transition'                , GetCSSProperty(element, 'transition') ); 
-	nbProperties += SetCSSPropertyIf(element, 'outline'                   , GetCSSProperty(element, 'outline') ); 
-	nbProperties += SetCSSPropertyIf(element, 'outline-offset'            , GetCSSProperty(element, 'outline-offset') != '0px'); 
-	nbProperties += SetCSSPropertyIf(element, 'box-sizing'                , GetCSSProperty(element, 'box-sizing') != 'content-box'); 
-	nbProperties += SetCSSPropertyIf(element, 'resize'                    , GetCSSProperty(element, 'resize') != 'none'); 
-
-	nbProperties += SetCSSPropertyIf(element, 'text-shadow'               , GetCSSProperty(element, 'text-shadow') != 'none'); 
-	nbProperties += SetCSSPropertyIf(element, 'text-overflow'             , GetCSSProperty(element, 'text-overflow') != 'clip'); 
-	nbProperties += SetCSSPropertyIf(element, 'word-wrap'                 , GetCSSProperty(element, 'word-wrap') != 'normal'); 
-	nbProperties += SetCSSPropertyIf(element, 'box-shadow'                , GetCSSProperty(element, 'box-shadow') != 'none');  
-
-	nbProperties += SetCSSPropertyIf(element, 'border-top-left-radius'    , GetCSSProperty(element, 'border-top-left-radius') != '0px'); 
-	nbProperties += SetCSSPropertyIf(element, 'border-top-right-radius'   , GetCSSProperty(element, 'border-top-right-radius') != '0px'); 
-	nbProperties += SetCSSPropertyIf(element, 'border-bottom-left-radius' , GetCSSProperty(element, 'border-bottom-left-radius') != '0px'); 
-	nbProperties += SetCSSPropertyIf(element, 'border-bottom-right-radius', GetCSSProperty(element, 'border-bottom-right-radius') != '0px'); 
-
-	if (nbProperties > 0)
-		ShowCSSCategory('pEffect');
-	else
-		HideCSSCategory('pEffect');
+	getVar(element)
 }
 
 /*
 ** Event Handlers
 */
+
+if (typeof window.getMatchedCSSRules !== 'function') {
+	var ELEMENT_RE = /[\w-]+/g,
+		ID_RE = /#[\w-]+/g,
+		CLASS_RE = /\.[\w-]+/g,
+		ATTR_RE = /\[[^\]]+\]/g,
+		// :not() pseudo-class does not add to specificity, but its content does as if it was outside it
+		PSEUDO_CLASSES_RE = /\:(?!not)[\w-]+(\(.*\))?/g,
+		PSEUDO_ELEMENTS_RE = /\:\:?(after|before|first-letter|first-line|selection)/g;
+	    // convert an array-like object to array
+	    function toArray(list) {
+		return [].slice.call(list);
+	    }
+
+	    // handles extraction of `cssRules` as an `Array` from a stylesheet or something that behaves the same
+	    function getSheetRules(stylesheet) {
+		var sheet_media = stylesheet.media && stylesheet.media.mediaText;
+		// if this sheet is disabled skip it
+		if ( stylesheet.disabled ) return [];
+		// if this sheet's media is specified and doesn't match the viewport then skip it
+		if ( sheet_media && sheet_media.length && ! window.matchMedia(sheet_media).matches ) return [];
+		// get the style rules of this sheet
+		return toArray(stylesheet.cssRules);
+	    }
+
+	    function _find(string, re) {
+		var matches = string.match(re);
+		return matches ? matches.length : 0;
+	    }
+
+	    // calculates the specificity of a given `selector`
+	    function calculateScore(selector) {
+		var score = [0,0,0],
+		    parts = selector.split(' '),
+		    part, match;
+		//TODO: clean the ':not' part since the last ELEMENT_RE will pick it up
+		while (part = parts.shift(), typeof part == 'string') {
+		    // find all pseudo-elements
+		    match = _find(part, PSEUDO_ELEMENTS_RE);
+		    score[2] += match;
+		    // and remove them
+		    match && (part = part.replace(PSEUDO_ELEMENTS_RE, ''));
+		    // find all pseudo-classes
+		    match = _find(part, PSEUDO_CLASSES_RE);
+		    score[1] += match;
+		    // and remove them
+		    match && (part = part.replace(PSEUDO_CLASSES_RE, ''));
+		    // find all attributes
+		    match = _find(part, ATTR_RE);
+		    score[1] += match;
+		    // and remove them
+		    match && (part = part.replace(ATTR_RE, ''));
+		    // find all IDs
+		    match = _find(part, ID_RE);
+		    score[0] += match;
+		    // and remove them
+		    match && (part = part.replace(ID_RE, ''));
+		    // find all classes
+		    match = _find(part, CLASS_RE);
+		    score[1] += match;
+		    // and remove them
+		    match && (part = part.replace(CLASS_RE, ''));
+		    // find all elements
+		    score[2] += _find(part, ELEMENT_RE);
+		}
+		return parseInt(score.join(''), 10);
+	    }
+
+	    // returns the heights possible specificity score an element can get from a give rule's selectorText
+	    function getSpecificityScore(element, selector_text) {
+		var selectors = selector_text.split(','),
+		    selector, score, result = 0;
+		while (selector = selectors.shift()) {
+		    if (matchesSelector(element, selector)) {
+			score = calculateScore(selector);
+			result = score > result ? score : result;
+		    }
+		}
+		return result;
+	    }
+
+	    function sortBySpecificity(element, rules) {
+		// comparing function that sorts CSSStyleRules according to specificity of their `selectorText`
+		function compareSpecificity (a, b) {
+		    return getSpecificityScore(element, b.selectorText) - getSpecificityScore(element, a.selectorText);
+		}
+
+		return rules.sort(compareSpecificity);
+	    }
+
+	    // Find correct matchesSelector impl
+	    function matchesSelector(el, selector) {
+	      var matcher = el.matchesSelector || el.mozMatchesSelector ||
+		  el.webkitMatchesSelector || el.oMatchesSelector || el.msMatchesSelector;
+	      return matcher.call(el, selector);
+	    }
+
+	    //TODO: not supporting 2nd argument for selecting pseudo elements
+	    //TODO: not supporting 3rd argument for checking author style sheets only
+	    window.getMatchedCSSRules = function (element /*, pseudo, author_only*/) {
+		var style_sheets, sheet, sheet_media,
+		    rules, rule,
+		    result = [];
+		// get stylesheets and convert to a regular Array
+		style_sheets = toArray(window.document.styleSheets);
+
+		// assuming the browser hands us stylesheets in order of appearance
+		// we iterate them from the beginning to follow proper cascade order
+		while (sheet = style_sheets.shift()) {
+		    // get the style rules of this sheet
+		    rules = getSheetRules(sheet);
+		    // loop the rules in order of appearance
+		    while (rule = rules.shift()) {
+			// if this is an @import rule
+			if (rule.styleSheet) {
+			    // insert the imported stylesheet's rules at the beginning of this stylesheet's rules
+			    rules = getSheetRules(rule.styleSheet).concat(rules);
+			    // and skip this rule
+			    continue;
+			}
+			// if there's no stylesheet attribute BUT there IS a media attribute it's a media rule
+			else if (rule.media) {
+			    // insert the contained rules of this media rule to the beginning of this stylesheet's rules
+			    rules = getSheetRules(rule).concat(rules);
+			    // and skip it
+			    continue
+			}
+
+			// check if this element matches this rule's selector
+			if (matchesSelector(element, rule.selectorText)) {
+			    // push the rule to the results set
+			    result.push(rule);
+			}
+		    }
+		}
+		// sort according to specificity
+		return sortBySpecificity(element, result);
+	    };
+    }
+
 
 function CSSViewerMouseOver(e)
 {
@@ -548,24 +508,18 @@ function CSSViewerMouseOver(e)
 	}
 
 	block.firstChild.innerHTML = '&lt;' + this.tagName + '&gt;' + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className);
-
 	// Outline element
 	if (this.tagName != 'body') {
 		this.style.outline = '1px dashed #f00';
 		CSSViewer_current_element = this;
 	}
-	
+
+
 	// Updating CSS properties
 	var element = document.defaultView.getComputedStyle(this, null);
 
-	UpdatefontText(element);
-	UpdateColorBg(element);
-	UpdateBox(element);
-	UpdatePositioning(element);
-	UpdateTable(element, this.tagName);
-	UpdateList(element, this.tagName);
-	UpdateMisc(element);
-	UpdateEffects(element);
+
+	UpdatefontText(this);
 
 	CSSViewer_element = this;
 
@@ -576,45 +530,20 @@ function CSSViewerMouseOver(e)
 	// generate simple css definition
 	CSSViewer_element_cssDefinition = this.tagName.toLowerCase() + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className) + " {\n";
 
-	CSSViewer_element_cssDefinition += "\t/* Font & Text */\n"; 
+
+	CSSViewer_element_cssDefinition += "\t/* Font & Tesxt */\n";
 	for (var i = 0; i < CSSViewer_pFont.length; i++)
 		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pFont[i] + ': ' + element.getPropertyValue( CSSViewer_pFont[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* Color & Background */\n";
-	for (var i = 0; i < CSSViewer_pColorBg.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pColorBg[i] + ': ' + element.getPropertyValue( CSSViewer_pColorBg[i] ) + ";\n";
-
-	CSSViewer_element_cssDefinition += "\n\t/* Box */\n";
-	for (var i = 0; i < CSSViewer_pBox.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pBox[i] + ': ' + element.getPropertyValue( CSSViewer_pBox[i] ) + ";\n";
-
-	CSSViewer_element_cssDefinition += "\n\t/* Positioning */\n";
-	for (var i = 0; i < CSSViewer_pPositioning.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pPositioning[i] + ': ' + element.getPropertyValue( CSSViewer_pPositioning[i] ) + ";\n";
-
-	CSSViewer_element_cssDefinition += "\n\t/* List */\n";
-	for (var i = 0; i < CSSViewer_pList.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pList[i] + ': ' + element.getPropertyValue( CSSViewer_pList[i] ) + ";\n";
-
-	CSSViewer_element_cssDefinition += "\n\t/* Table */\n";
-	for (var i = 0; i < CSSViewer_pTable.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pTable[i] + ': ' + element.getPropertyValue( CSSViewer_pTable[i] ) + ";\n";
-
-	CSSViewer_element_cssDefinition += "\n\t/* Miscellaneous */\n";
-	for (var i = 0; i < CSSViewer_pMisc.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pMisc[i] + ': ' + element.getPropertyValue( CSSViewer_pMisc[i] ) + ";\n";
-
-	CSSViewer_element_cssDefinition += "\n\t/* Effects */\n"; 
-	for (var i = 0; i < CSSViewer_pEffect.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pEffect[i] + ': ' + element.getPropertyValue( CSSViewer_pEffect[i] ) + ";\n";
-
 	CSSViewer_element_cssDefinition += "}";
 
-	// console.log( element.cssText ); //< debug the hovered el css
 }
 
 function CSSViewerMouseOut(e)
 {
+
+	cssViewer.Disable();
+	cssViewer.Enable();
 	this.style.outline = '';
 
 	e.stopPropagation();
@@ -630,7 +559,7 @@ function CSSViewerMouseMove(e)
 	}
 
 	block.style.display = 'block';
-	
+
 	var pageWidth = window.innerWidth;
 	var pageHeight = window.innerHeight;
 	var blockWidth = 332;
@@ -686,18 +615,18 @@ function CSSViewer()
 	this.CreateBlock = function() {
 		var document = GetCurrentDocument();
 		var block;
-		
+
 		if (document) {
 			// Create a div block
 			block = document.createElement('div');
 			block.id = 'CSSViewer_block';
-			
+
 			// Insert a title for CSS selector
 			var header = document.createElement('h1');
 
 			header.appendChild(document.createTextNode(''));
 			block.appendChild(header);
-			
+
 			// Insert all properties
 			var center = document.createElement('div');
 
@@ -731,6 +660,9 @@ function CSSViewer()
 					li.appendChild(spanName);
 					li.appendChild(spanValue);
 					ul.appendChild(li);
+
+					li.style.display = 'none';
+
 				}
 
 				div.appendChild(h2);
@@ -745,16 +677,15 @@ function CSSViewer()
 
 			footer.id = 'CSSViewer_footer';
 
-			//< 
-			footer.appendChild( document.createTextNode('CSSViewer 1.7. keys: [f] Un/Freeze. [c] Css. [Esc] Close.') ); 
+			//<
+			footer.appendChild( document.createTextNode('CSSViewer 1.7. keys: [f] Un/Freeze. [c] Css. [Esc] Close.') );
 			block.appendChild(footer);
 		}
-		
+
 		cssViewerInsertMessage( "CSSViewer loaded! Hover any element you want to inspect in the page." );
 
 		return block;
 	}
-	
 	// Get all elements within the given element
 	this.GetAllElements = function(element)
 	{
@@ -777,7 +708,7 @@ function CSSViewer()
 
 		return elements;
 	}
-	
+
 	// Add bool for knowing all elements having event listeners or not
 	this.haveEventListeners = false;
 
@@ -791,10 +722,10 @@ function CSSViewer()
 			elements[i].addEventListener("mouseover", CSSViewerMouseOver, false);
 			elements[i].addEventListener("mouseout", CSSViewerMouseOut, false);
 			elements[i].addEventListener("mousemove", CSSViewerMouseMove, false);
-		}	
+		}
 		this.haveEventListeners = true;
 	}
-	
+
 	// Remove event listeners for all elements in the current document
 	this.RemoveEventListeners = function()
 	{
@@ -805,14 +736,14 @@ function CSSViewer()
 			elements[i].removeEventListener("mouseover", CSSViewerMouseOver, false);
 			elements[i].removeEventListener("mouseout", CSSViewerMouseOut, false);
 			elements[i].removeEventListener("mousemove", CSSViewerMouseMove, false);
-		}	
+		}
 		this.haveEventListeners = false;
 	}
 
 	// Set the title of the block
 	this.SetTitle = function()
 	{}
-	
+
 	// Add a stylesheet to the current document
 	this.AddCSS = function(cssFile)
 	{
@@ -830,7 +761,7 @@ function CSSViewer()
 		else
 		    document.documentElement.appendChild(link);
 	}
-	
+
 	this.RemoveCSS = function(cssFile)
 	{
 		var document = GetCurrentDocument();
@@ -892,7 +823,7 @@ CSSViewer.prototype.Disable = function()
 	var block = document.getElementById('CSSViewer_block');
 
 	if (block) {
-		document.body.removeChild(block); 
+		document.body.removeChild(block);
 		this.RemoveEventListeners();
 
 		return true;
@@ -966,11 +897,11 @@ function cssViewerInsertMessage( msg )
 * Removes and element from the dom, used to remove the notification message
 */
 function cssViewerRemoveElement(divid)
-{   
+{
 	var n = document.getElementById(divid);
 
 	if(n){
-		document.body.removeChild(n); 
+		document.body.removeChild(n);
 	}
 }
 
@@ -978,15 +909,54 @@ function cssViewerRemoveElement(divid)
 * Copy current element css to chrome console
 */
 function cssViewerCopyCssToConsole(type)
-{   
+{
 	if( 'el' == type ) return console.log( CSSViewer_element );
+	if( 'style' == type ) return console.log ( getVariables(CSSViewer_element));
 	if( 'id' == type ) return console.log( CSSViewer_element.id );
 	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
 	if( 'className' == type ) return console.log( CSSViewer_element.className );
-	if( 'style' == type ) return console.log( CSSViewer_element.style ); 
-	if( 'cssText' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null).cssText );
+	// if( 'style' == type ) return console.log( CSSViewer_element.style );
+	if( 'cssText' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, '').cssText );
 	if( 'getComputedStyle' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null) );
 	if( 'simpleCssDefinition' == type ) return console.log( CSSViewer_element_cssDefinition );
+}
+
+
+function getVariables(CSSViewer_element) {
+	// console.log(CSSViewer_element.selectorText)
+	console.log(CSSViewer_element)
+
+
+	// console.log(CSSViewer_element.element)
+	// console.log(GetCurrentDocument.window.getMatchedCSSRules(CSSViewer_element)[0])
+
+	var variables = Array.from(document.styleSheets)
+	.filter(
+	  sheet =>
+	    sheet.href === null || sheet.href.startsWith(window.location.origin)
+	)
+	.reduce(
+	  (acc, sheet) =>
+	    (acc = [
+	      ...acc,
+	      ...Array.from(sheet.cssRules).reduce(
+		(def, rule) =>
+		  (def =
+		//     rule.selectorText === ":root"
+			rule.selectorText === this.selectorText
+		      ? [
+			  ...def,
+			  ...Array.from(rule.style).filter(name =>
+			    name.startsWith("--")
+			  )
+			]
+		      : def),
+		[]
+	      )
+	    ]),
+	  []
+	);
+	return variables;
 }
 
 /*
@@ -1003,7 +973,7 @@ function CssViewerKeyMap(e) {
 		CSSViewer_current_element.style.outline = '';
 		cssViewer.Disable();
 	}
-	
+
 	if( e.altKey || e.ctrlKey )
 		return;
 
@@ -1017,7 +987,7 @@ function CssViewerKeyMap(e) {
 		}
 	}
 
-	// c: Show code css for selected element. 
+	// c: Show code css for selected element.
 	// window.prompt should suffice for now.
 	if ( e.keyCode === 67 ){
 		window.prompt("Simple Css Definition :\n\nYou may copy the code below then hit escape to continue.", CSSViewer_element_cssDefinition);
@@ -1031,11 +1001,11 @@ function CssViewerKeyMap(e) {
 cssViewer = new CSSViewer();
 
 if ( cssViewer.IsEnabled() ){
-	cssViewer.Disable();  
+	cssViewer.Disable();
 }
 else{
-	cssViewer.Enable(); 
+	cssViewer.Enable();
 }
 
-// Set event handler for the CssViewer 
+// Set event handler for the CssViewer
 document.onkeydown = CssViewerKeyMap;
