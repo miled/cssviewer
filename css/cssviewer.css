@@ -3,10 +3,13 @@
 * https://github.com/cssviewer/cssviewer
 * https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce
 *
-* Copyright (c) 2006, 2008 Nicolas Huon 
+* Copyright (c) 2006, 2008 Nicolas Huon
 *
 * This source code is licensed under the GNU General Public License,
 * Version 2. See the file COPYING for more details.
+*
+* This version was modified on 12s/2019 to support css variables.
+*
 */
 
 /*
@@ -35,7 +38,7 @@ span.CSSViewer_property,
 	visibility: visible !important;
 	width:auto !important;
 	height:auto !important;
-	line-height: 20px; 
+	line-height: 20px;
 }
 
 #CSSViewer_block
@@ -54,7 +57,7 @@ span.CSSViewer_property,
 	text-transform:none !important;
 	text-align:center !important;
 	width:322px !important;
-	display:block !important; 
+	display:block !important;
 	background:url("chrome-extension://__MSG_@@extension_id__/img/header.png") !important;
 	padding:30px 10px 5px 10px !important;
 	margin:5% auto;
@@ -104,7 +107,7 @@ span.CSSViewer_property,
 #CSSViewer_block li
 {
 	background:url("chrome-extension://__MSG_@@extension_id__/img/bullet.png") no-repeat left center !important;
-	padding-left:10px !important; 
+	padding-left:10px !important;
 }
 
 
@@ -112,7 +115,7 @@ span.CSSViewer_property,
 {
 	color:#888 !important;
 	float:left !important;
-	width:100px !important; 
-	display:block !important; 
+	width:100px !important;
+	display:block !important;
 	overflow:hidden !important;
 }

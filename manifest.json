@@ -1,9 +1,9 @@
 {
-	"name": "CSSViewer",
+	"name": "CSSViewer_GEE",
 	"manifest_version": 2,
 	"version": "1.7",
 
-	"description": "A simple CSS property viewer.", 
+	"description": "A simple CSS property viewer.",
 
 	"icons": {
 		"16": "img/16.png",
@@ -31,9 +31,9 @@
 
 	"permissions": [
 		"tabs",
-		"http://*/*", 
-		"https://*/*", 
-		"file://*/*", 
+		"http://*/*",
+		"https://*/*",
+		"file://*/*",
 		"contextMenus"
-	] 
+	]
 }

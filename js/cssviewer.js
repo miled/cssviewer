@@ -8,14 +8,10 @@
 *
 * This source code is licensed under the GNU General Public License,
 * Version 2. See the file COPYING for more details.
+*
+* This version was modified on 12/2019 to support css variables.
+*
 */
-
-// Roadmap/ToDos
-//    1. Make the initial code more readable
-//    2. Comment the initial code
-//    3. Fix issues if any
-//    4. Add new features (feasible and useful ones)
-//    5. Make a new branch and start re-factoring the entire code
 
 /*
 ** Globals
@@ -242,14 +238,11 @@ function SetCSSProperty_var(property, value)
 {
 	var document = GetCurrentDocument();
 	var li = document.getElementById('CSSViewer_' + property);
-	// console.log(value)
 
-	// if(value != "" || value != null){
+	if(value != "" && li != null){
 		li.lastChild.innerHTML = " : " + value;
 		li.style.display = 'block';
-	// }else{
-		// li.style.display = 'none';
-	// }
+	}
 }
 
 function SetCSSProperty(element, property)
