@@ -31,159 +31,159 @@ var CSSViewer_current_element
 
 // CSS Properties
 var CSSViewer_pFont = new Array(
-	'font-family', 
-	'font-size', 
-	'font-style', 
-	'font-variant', 
-	'font-weight', 
-	'letter-spacing', 
-	'line-height', 
-	'text-decoration', 
-	'text-align', 
-	'text-indent', 
-	'text-transform', 
-	'vertical-align', 
-	'white-space', 
-	'word-spacing'
+	// 'font-family', 
+	// 'font-size', 
+	// 'font-style', 
+	// 'font-variant', 
+	// 'font-weight', 
+	// 'letter-spacing', 
+	// 'line-height', 
+	// 'text-decoration', 
+	// 'text-align', 
+	// 'text-indent', 
+	// 'text-transform', 
+	// 'vertical-align', 
+	// 'white-space', 
+	// 'word-spacing'
 );
 
 var CSSViewer_pColorBg = new Array(
-	'background-attachment', 
-	'background-color', 
-	'background-image',
-	'background-position',
-	'background-repeat',
-	'color'
+	// 'background-attachment', 
+	// 'background-color', 
+	// 'background-image',
+	// 'background-position',
+	// 'background-repeat',
+	// 'color'
 );
 
 var CSSViewer_pBox = new Array(
-	'height',
-	'width',
-	'border',
-	'border-top',
-	'border-right',
-	'border-bottom', 
-	'border-left',
-	'margin',
-	'padding',
-	'max-height',
-	'min-height',
-	'max-width',
-	'min-width'
+	// 'height',
+	// 'width',
+	// 'border',
+	// 'border-top',
+	// 'border-right',
+	// 'border-bottom', 
+	// 'border-left',
+	// 'margin',
+	// 'padding',
+	// 'max-height',
+	// 'min-height',
+	// 'max-width',
+	// 'min-width'
 );
 
 var CSSViewer_pPositioning = new Array(
-	'position', 
-	'top', 
-	'bottom', 
-	'right', 
-	'left', 
-	'float', 
-	'display', 
-	'clear', 
-	'z-index'
+	// 'position', 
+	// 'top', 
+	// 'bottom', 
+	// 'right', 
+	// 'left', 
+	// 'float', 
+	// 'display', 
+	// 'clear', 
+	// 'z-index'
 );
 
 var CSSViewer_pList = new Array(
-	'list-style-image', 
-	'list-style-type', 
-	'list-style-position'
+	// 'list-style-image', 
+	// 'list-style-type', 
+	// 'list-style-position'
 );
 
 var CSSViewer_pTable = new Array(
-	'border-collapse',
-	'border-spacing',
-	'caption-side',
-	'empty-cells',
-	'table-layout'
+	// 'border-collapse',
+	// 'border-spacing',
+	// 'caption-side',
+	// 'empty-cells',
+	// 'table-layout'
 );
 
 var CSSViewer_pMisc = new Array(
-	'overflow', 
-	'cursor', 
-	'visibility'
+	// 'overflow', 
+	// 'cursor', 
+	// 'visibility'
 );
 
 var CSSViewer_pEffect = new Array(
-	'transform',
-	'transition',
-	'outline',
-	'outline-offset',
-	'box-sizing',
-	'resize',
-	'text-shadow',
-	'text-overflow',
-	'word-wrap',
-	'box-shadow',
-	'border-top-left-radius',
-	'border-top-right-radius',
-	'border-bottom-left-radius',
-	'border-bottom-right-radius'
+	// 'transform',
+	// 'transition',
+	// 'outline',
+	// 'outline-offset',
+	// 'box-sizing',
+	// 'resize',
+	// 'text-shadow',
+	// 'text-overflow',
+	// 'word-wrap',
+	// 'box-shadow',
+	// 'border-top-left-radius',
+	// 'border-top-right-radius',
+	// 'border-bottom-left-radius',
+	// 'border-bottom-right-radius'
 );
 
 // CSS Property categories
 var CSSViewer_categories = { 
-	'pFontText'    : CSSViewer_pFont, 
-	'pColorBg'     : CSSViewer_pColorBg, 
-	'pBox'         : CSSViewer_pBox, 
-	'pPositioning' : CSSViewer_pPositioning, 
-	'pList'        : CSSViewer_pList, 
-	'pTable'       : CSSViewer_pTable, 
-	'pMisc'        : CSSViewer_pMisc, 
-	'pEffect'      : CSSViewer_pEffect 
+	// 'pFontText'    : CSSViewer_pFont, 
+	// 'pColorBg'     : CSSViewer_pColorBg, 
+	// 'pBox'         : CSSViewer_pBox, 
+	// 'pPositioning' : CSSViewer_pPositioning, 
+	// 'pList'        : CSSViewer_pList, 
+	// 'pTable'       : CSSViewer_pTable, 
+	// 'pMisc'        : CSSViewer_pMisc, 
+	// 'pEffect'      : CSSViewer_pEffect 
 };
 
 var CSSViewer_categoriesTitle = { 
-	'pFontText'    : 'Font & Text', 
-	'pColorBg'     : 'Color & Background', 
-	'pBox'         : 'Box', 
-	'pPositioning' : 'Positioning', 
-	'pList'        : 'List', 
-	'pTable'       : 'Table', 
-	'pMisc'        : 'Miscellaneous', 
-	'pEffect'      : 'Effects' 
+	// 'pFontText'    : 'Font & Text', 
+	// 'pColorBg'     : 'Color & Background', 
+	// 'pBox'         : 'Box', 
+	// 'pPositioning' : 'Positioning', 
+	// 'pList'        : 'List', 
+	// 'pTable'       : 'Table', 
+	// 'pMisc'        : 'Miscellaneous', 
+	// 'pEffect'      : 'Effects' 
 };
 
 // Table tagnames
 var CSSViewer_tableTagNames = new Array(
-	'TABLE',
-	'CAPTION',
-	'THEAD',
-	'TBODY',
-	'TFOOT',
-	'COLGROUP',
-	'COL',
-	'TR',
-	'TH',
-	'TD'
+	// 'TABLE',
+	// 'CAPTION',
+	// 'THEAD',
+	// 'TBODY',
+	// 'TFOOT',
+	// 'COLGROUP',
+	// 'COL',
+	// 'TR',
+	// 'TH',
+	// 'TD'
 );
 
 var CSSViewer_listTagNames = new Array(
-	'UL',
-	'LI',
-	'DD',
-	'DT',
-	'OL'
+	// 'UL',
+	// 'LI',
+	// 'DD',
+	// 'DT',
+	// 'OL'
 );
 
 // Hexadecimal
 var CSSViewer_hexa = new Array(
-	'0',
-	'1',
-	'2',
-	'3',
-	'4',
-	'5',
-	'6',
-	'7',
-	'8',
-	'9',
-	'A',
-	'B',
-	'C',
-	'D',
-	'E',
-	'F'
+	// '0',
+	// '1',
+	// '2',
+	// '3',
+	// '4',
+	// '5',
+	// '6',
+	// '7',
+	// '8',
+	// '9',
+	// 'A',
+	// 'B',
+	// 'C',
+	// 'D',
+	// 'E',
+	// 'F'
 );
 
 /*
@@ -342,6 +342,11 @@ function ShowCSSCategory(category)
 	var div = document.getElementById('CSSViewer_' + category);
 
 	div.style.display = 'block';
+}
+
+function UpdateElement(element)
+{
+	console.log(element);
 }
 
 function UpdatefontText(element)
@@ -556,59 +561,65 @@ function CSSViewerMouseOver(e)
 	}
 	
 	// Updating CSS properties
-	var element = document.defaultView.getComputedStyle(this, null);
+	// var element = document.defaultView.getComputedStyle(this, null);
+	if (this.attributes['data-testid']) {
+		console.log(this.attributes['data-testid'].value);
+	}
+	
+	
 
-	UpdatefontText(element);
-	UpdateColorBg(element);
-	UpdateBox(element);
-	UpdatePositioning(element);
-	UpdateTable(element, this.tagName);
-	UpdateList(element, this.tagName);
-	UpdateMisc(element);
-	UpdateEffects(element);
+	// UpdateElement(this);
+	// UpdatefontText(element);
+	// UpdateColorBg(element);
+	// UpdateBox(element);
+	// UpdatePositioning(element);
+	// UpdateTable(element, this.tagName);
+	// UpdateList(element, this.tagName);
+	// UpdateMisc(element);
+	// UpdateEffects(element);
 
-	CSSViewer_element = this;
+	// CSSViewer_element = this;
 
-	cssViewerRemoveElement("cssViewerInsertMessage");
+	// cssViewerRemoveElement("cssViewerInsertMessage");
 
-	e.stopPropagation();
+	// e.stopPropagation();
 
-	// generate simple css definition
-	CSSViewer_element_cssDefinition = this.tagName.toLowerCase() + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className) + " {\n";
+	// // generate simple css definition
+	// CSSViewer_element_cssDefinition = this.tagName.toLowerCase() + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className) + " {\n";
 
-	CSSViewer_element_cssDefinition += "\t/* Font & Text */\n"; 
-	for (var i = 0; i < CSSViewer_pFont.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pFont[i] + ': ' + element.getPropertyValue( CSSViewer_pFont[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\t/* Font & Text */\n"; 
+	// for (var i = 0; i < CSSViewer_pFont.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pFont[i] + ': ' + element.getPropertyValue( CSSViewer_pFont[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* Color & Background */\n";
-	for (var i = 0; i < CSSViewer_pColorBg.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pColorBg[i] + ': ' + element.getPropertyValue( CSSViewer_pColorBg[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\n\t/* Color & Background */\n";
+	// for (var i = 0; i < CSSViewer_pColorBg.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pColorBg[i] + ': ' + element.getPropertyValue( CSSViewer_pColorBg[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* Box */\n";
-	for (var i = 0; i < CSSViewer_pBox.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pBox[i] + ': ' + element.getPropertyValue( CSSViewer_pBox[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\n\t/* Box */\n";
+	// for (var i = 0; i < CSSViewer_pBox.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pBox[i] + ': ' + element.getPropertyValue( CSSViewer_pBox[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* Positioning */\n";
-	for (var i = 0; i < CSSViewer_pPositioning.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pPositioning[i] + ': ' + element.getPropertyValue( CSSViewer_pPositioning[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\n\t/* Positioning */\n";
+	// for (var i = 0; i < CSSViewer_pPositioning.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pPositioning[i] + ': ' + element.getPropertyValue( CSSViewer_pPositioning[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* List */\n";
-	for (var i = 0; i < CSSViewer_pList.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pList[i] + ': ' + element.getPropertyValue( CSSViewer_pList[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\n\t/* List */\n";
+	// for (var i = 0; i < CSSViewer_pList.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pList[i] + ': ' + element.getPropertyValue( CSSViewer_pList[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* Table */\n";
-	for (var i = 0; i < CSSViewer_pTable.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pTable[i] + ': ' + element.getPropertyValue( CSSViewer_pTable[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\n\t/* Table */\n";
+	// for (var i = 0; i < CSSViewer_pTable.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pTable[i] + ': ' + element.getPropertyValue( CSSViewer_pTable[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* Miscellaneous */\n";
-	for (var i = 0; i < CSSViewer_pMisc.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pMisc[i] + ': ' + element.getPropertyValue( CSSViewer_pMisc[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\n\t/* Miscellaneous */\n";
+	// for (var i = 0; i < CSSViewer_pMisc.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pMisc[i] + ': ' + element.getPropertyValue( CSSViewer_pMisc[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "\n\t/* Effects */\n"; 
-	for (var i = 0; i < CSSViewer_pEffect.length; i++)
-		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pEffect[i] + ': ' + element.getPropertyValue( CSSViewer_pEffect[i] ) + ";\n";
+	// CSSViewer_element_cssDefinition += "\n\t/* Effects */\n"; 
+	// for (var i = 0; i < CSSViewer_pEffect.length; i++)
+	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pEffect[i] + ': ' + element.getPropertyValue( CSSViewer_pEffect[i] ) + ";\n";
 
-	CSSViewer_element_cssDefinition += "}";
+	// CSSViewer_element_cssDefinition += "}";
 
 	// console.log( element.cssText ); //< debug the hovered el css
 }
@@ -746,7 +757,7 @@ function CSSViewer()
 			footer.id = 'CSSViewer_footer';
 
 			//< 
-			footer.appendChild( document.createTextNode('CSSViewer 1.7. keys: [f] Un/Freeze. [c] Css. [Esc] Close.') ); 
+			footer.appendChild( document.createTextNode('keys: [f] Un/Freeze. [c] Css. [Esc] Close.') ); 
 			block.appendChild(footer);
 		}
 		
@@ -980,6 +991,7 @@ function cssViewerRemoveElement(divid)
 function cssViewerCopyCssToConsole(type)
 {   
 	if( 'el' == type ) return console.log( CSSViewer_element );
+	if( 'data-testid' == type ) return console.log( CSSViewer_element.data-testid );
 	if( 'id' == type ) return console.log( CSSViewer_element.id );
 	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
 	if( 'className' == type ) return console.log( CSSViewer_element.className );

@@ -1,7 +1,7 @@
 {
-	"name": "CSSViewer",
+	"name": "CSSViewer (fork)",
 	"manifest_version": 2,
-	"version": "1.7",
+	"version": "1.7.1",
 
 	"description": "A simple CSS property viewer.", 
 
