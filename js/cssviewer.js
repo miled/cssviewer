@@ -346,7 +346,7 @@ function ShowCSSCategory(category)
 
 function UpdateElement(element)
 {
-	console.log(element);
+	SetCSSProperty(element, 'Elementos');
 }
 
 function UpdatefontText(element)
@@ -564,6 +564,7 @@ function CSSViewerMouseOver(e)
 	// var element = document.defaultView.getComputedStyle(this, null);
 	if (this.attributes['data-testid']) {
 		console.log(this.attributes['data-testid'].value);
+		UpdateElement(this.attributes['data-testid'].value);
 	}
 	
 	
