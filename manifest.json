@@ -1,9 +1,9 @@
 {
-	"name": "CSSViewer (fork)",
+	"name": "Data-testID Viewer",
 	"manifest_version": 2,
-	"version": "1.7.1",
+	"version": "1.0",
 
-	"description": "A simple CSS property viewer.", 
+	"description": "A simple data-testID attributes viewer.", 
 
 	"icons": {
 		"16": "img/16.png",
@@ -18,7 +18,7 @@
 
 	"browser_action": {
 		"default_icon": "img/16.png",
-		"default_title": "CSSViewer"
+		"default_title": "Data-testID"
 	},
 
 	"web_accessible_resources": [

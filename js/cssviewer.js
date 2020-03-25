@@ -31,63 +31,67 @@ var CSSViewer_current_element
 
 // CSS Properties
 var CSSViewer_pFont = new Array(
-	// 'font-family', 
-	// 'font-size', 
-	// 'font-style', 
-	// 'font-variant', 
-	// 'font-weight', 
-	// 'letter-spacing', 
-	// 'line-height', 
-	// 'text-decoration', 
-	// 'text-align', 
-	// 'text-indent', 
-	// 'text-transform', 
-	// 'vertical-align', 
-	// 'white-space', 
-	// 'word-spacing'
+	'font-family', 
+	'font-size', 
+	'font-style', 
+	'font-variant', 
+	'font-weight', 
+	'letter-spacing', 
+	'line-height', 
+	'text-decoration', 
+	'text-align', 
+	'text-indent', 
+	'text-transform', 
+	'vertical-align', 
+	'white-space', 
+	'word-spacing'
+);
+
+var CSSViewer_pTest = new Array(
+	'data-testID', 
 );
 
 var CSSViewer_pColorBg = new Array(
-	// 'background-attachment', 
-	// 'background-color', 
-	// 'background-image',
-	// 'background-position',
-	// 'background-repeat',
-	// 'color'
+	'background-attachment', 
+	'background-color', 
+	'background-image',
+	'background-position',
+	'background-repeat',
+	'color'
 );
 
 var CSSViewer_pBox = new Array(
-	// 'height',
-	// 'width',
-	// 'border',
-	// 'border-top',
-	// 'border-right',
-	// 'border-bottom', 
-	// 'border-left',
-	// 'margin',
-	// 'padding',
-	// 'max-height',
-	// 'min-height',
-	// 'max-width',
-	// 'min-width'
+	'height',
+	'width',
+	'border',
+	'border-top',
+	'border-right',
+	'border-bottom', 
+	'border-left',
+	'margin',
+	'padding',
+	'max-height',
+	'min-height',
+	'max-width',
+	'min-width'
 );
 
 var CSSViewer_pPositioning = new Array(
-	// 'position', 
-	// 'top', 
-	// 'bottom', 
-	// 'right', 
-	// 'left', 
-	// 'float', 
-	// 'display', 
-	// 'clear', 
-	// 'z-index'
+	'position', 
+	'top', 
+	'bottom', 
+	'right', 
+	'left', 
+	'float', 
+	'display', 
+	'clear', 
+	'z-index'
 );
 
 var CSSViewer_pList = new Array(
-	// 'list-style-image', 
-	// 'list-style-type', 
-	// 'list-style-position'
+	'list-style-image', 
+	'list-style-type', 
+	'list-style-position'
 );
 
 var CSSViewer_pTable = new Array(
@@ -99,30 +103,33 @@ var CSSViewer_pTable = new Array(
 );
 
 var CSSViewer_pMisc = new Array(
-	// 'overflow', 
-	// 'cursor', 
-	// 'visibility'
+	'overflow', 
+	'cursor', 
+	'visibility'
 );
 
 var CSSViewer_pEffect = new Array(
-	// 'transform',
-	// 'transition',
-	// 'outline',
-	// 'outline-offset',
-	// 'box-sizing',
-	// 'resize',
-	// 'text-shadow',
-	// 'text-overflow',
-	// 'word-wrap',
-	// 'box-shadow',
-	// 'border-top-left-radius',
-	// 'border-top-right-radius',
-	// 'border-bottom-left-radius',
-	// 'border-bottom-right-radius'
+	'transform',
+	'transition',
+	'outline',
+	'outline-offset',
+	'box-sizing',
+	'resize',
+	'text-shadow',
+	'text-overflow',
+	'word-wrap',
+	'box-shadow',
+	'border-top-left-radius',
+	'border-top-right-radius',
+	'border-bottom-left-radius',
+	'border-bottom-right-radius'
 );
 
+//agrega a la vista
 // CSS Property categories
 var CSSViewer_categories = { 
+	
+	'pTest'        : CSSViewer_pTest ,
 	// 'pFontText'    : CSSViewer_pFont, 
 	// 'pColorBg'     : CSSViewer_pColorBg, 
 	// 'pBox'         : CSSViewer_pBox, 
@@ -133,7 +140,9 @@ var CSSViewer_categories = {
 	// 'pEffect'      : CSSViewer_pEffect 
 };
 
+// titulos
 var CSSViewer_categoriesTitle = { 
+	'pTest'        : 'data-testID' ,
 	// 'pFontText'    : 'Font & Text', 
 	// 'pColorBg'     : 'Color & Background', 
 	// 'pBox'         : 'Box', 
@@ -159,31 +168,31 @@ var CSSViewer_tableTagNames = new Array(
 );
 
 var CSSViewer_listTagNames = new Array(
-	// 'UL',
-	// 'LI',
-	// 'DD',
-	// 'DT',
-	// 'OL'
+	'UL',
+	'LI',
+	'DD',
+	'DT',
+	'OL'
 );
 
 // Hexadecimal
 var CSSViewer_hexa = new Array(
-	// '0',
-	// '1',
-	// '2',
-	// '3',
-	// '4',
-	// '5',
-	// '6',
-	// '7',
-	// '8',
-	// '9',
-	// 'A',
-	// 'B',
-	// 'C',
-	// 'D',
-	// 'E',
-	// 'F'
+	'0',
+	'1',
+	'2',
+	'3',
+	'4',
+	'5',
+	'6',
+	'7',
+	'8',
+	'9',
+	'A',
+	'B',
+	'C',
+	'D',
+	'E',
+	'F'
 );
 
 /*
@@ -275,6 +284,14 @@ function SetCSSProperty(element, property)
 	li.lastChild.innerHTML = " : " + element.getPropertyValue(property);
 }
 
+function SetCSSPropertyText(text, property)
+{
+	var document = GetCurrentDocument();
+	var li = document.getElementById('CSSViewer_' + property);
+
+	li.lastChild.innerHTML = " : " + text;
+}
+
 function SetCSSPropertyIf(element, property, condition)
 {
 	var document = GetCurrentDocument();
@@ -342,11 +359,6 @@ function ShowCSSCategory(category)
 	var div = document.getElementById('CSSViewer_' + category);
 
 	div.style.display = 'block';
-}
-
-function UpdateElement(element)
-{
-	SetCSSProperty(element, 'Elementos');
 }
 
 function UpdatefontText(element)
@@ -561,12 +573,7 @@ function CSSViewerMouseOver(e)
 	}
 	
 	// Updating CSS properties
-	// var element = document.defaultView.getComputedStyle(this, null);
-	if (this.attributes['data-testid']) {
-		console.log(this.attributes['data-testid'].value);
-		UpdateElement(this.attributes['data-testid'].value);
-	}
-	
+	var element = document.defaultView.getComputedStyle(this, null);
 	
 
 	// UpdateElement(this);
@@ -579,14 +586,23 @@ function CSSViewerMouseOver(e)
 	// UpdateMisc(element);
 	// UpdateEffects(element);
 
-	// CSSViewer_element = this;
+	CSSViewer_element = this;
 
-	// cssViewerRemoveElement("cssViewerInsertMessage");
+	cssViewerRemoveElement("cssViewerInsertMessage");
 
-	// e.stopPropagation();
+	e.stopPropagation();
 
 	// // generate simple css definition
-	// CSSViewer_element_cssDefinition = this.tagName.toLowerCase() + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className) + " {\n";
+	CSSViewer_element_cssDefinition = this.tagName.toLowerCase() + (this.id == '' ? '' : ' #' + this.id) + (this.className == '' ? '' : ' .' + this.className) + " {\n";
+
+	if (this.attributes['data-testid']) {
+		let e = this.attributes['data-testid'].value;
+		// console.log(e);
+		SetCSSPropertyText(e,'data-testID');
+		CSSViewer_element_cssDefinition += "\t/* data-testID */\n";
+		CSSViewer_element_cssDefinition += "\t" + CSSViewer_pTest[0] + ': ' + e  + ";\n";
+	}
+
 
 	// CSSViewer_element_cssDefinition += "\t/* Font & Text */\n"; 
 	// for (var i = 0; i < CSSViewer_pFont.length; i++)
@@ -620,9 +636,10 @@ function CSSViewerMouseOver(e)
 	// for (var i = 0; i < CSSViewer_pEffect.length; i++)
 	// 	CSSViewer_element_cssDefinition += "\t" + CSSViewer_pEffect[i] + ': ' + element.getPropertyValue( CSSViewer_pEffect[i] ) + ";\n";
 
-	// CSSViewer_element_cssDefinition += "}";
+	CSSViewer_element_cssDefinition += "}";
 
 	// console.log( element.cssText ); //< debug the hovered el css
+
 }
 
 function CSSViewerMouseOut(e)
@@ -758,12 +775,13 @@ function CSSViewer()
 			footer.id = 'CSSViewer_footer';
 
 			//< 
-			footer.appendChild( document.createTextNode('keys: [f] Un/Freeze. [c] Css. [Esc] Close.') ); 
+			// footer.appendChild( document.createTextNode('keys: [f] Un/Freeze. [c] Css. [Esc] Close.') ); 
+			footer.appendChild( document.createTextNode('keys: [f] Un/Freeze. [Esc] Close.') ); 
 			block.appendChild(footer);
 		}
 		
-		cssViewerInsertMessage( "CSSViewer loaded! Hover any element you want to inspect in the page." );
-
+		// cssViewerInsertMessage( "CSSViewer loaded! Hover any element you want to inspect in the page." );
+		cssViewerInsertMessage( "Mueve el mouse para encontrar el data-testID!." );
 		return block;
 	}
 	
@@ -989,18 +1007,18 @@ function cssViewerRemoveElement(divid)
 /*
 * Copy current element css to chrome console
 */
-function cssViewerCopyCssToConsole(type)
-{   
-	if( 'el' == type ) return console.log( CSSViewer_element );
-	if( 'data-testid' == type ) return console.log( CSSViewer_element.data-testid );
-	if( 'id' == type ) return console.log( CSSViewer_element.id );
-	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
-	if( 'className' == type ) return console.log( CSSViewer_element.className );
-	if( 'style' == type ) return console.log( CSSViewer_element.style ); 
-	if( 'cssText' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null).cssText );
-	if( 'getComputedStyle' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null) );
-	if( 'simpleCssDefinition' == type ) return console.log( CSSViewer_element_cssDefinition );
-}
+// function cssViewerCopyCssToConsole(type)
+// {   
+// 	if( 'el' == type ) return console.log( CSSViewer_element );
+// 	if( 'data-testid' == type ) return console.log( CSSViewer_element.data-testid );
+// 	if( 'id' == type ) return console.log( CSSViewer_element.id );
+// 	if( 'tagName' == type ) return console.log( CSSViewer_element.tagName );
+// 	if( 'className' == type ) return console.log( CSSViewer_element.className );
+// 	if( 'style' == type ) return console.log( CSSViewer_element.style ); 
+// 	if( 'cssText' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null).cssText );
+// 	if( 'getComputedStyle' == type ) return console.log( document.defaultView.getComputedStyle(CSSViewer_element, null) );
+// 	if( 'simpleCssDefinition' == type ) return console.log( CSSViewer_element_cssDefinition );
+// }
 
 /*
 *  Close css viewer on clicking 'esc' key
