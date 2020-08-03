@@ -24,7 +24,7 @@ Whell, it's GPLv2, but please bear with me,
 
 I attempted to contact Nicolas to ask for permission but to no avail, furthermore, the FireFox add-on seems abandoned since June 2008. Believing that **CSSViewer** is a great resource for web developers and web designers alike, I made a CSSViewer port to Google Chrome on March 2010, and on February 2013, I decided to release the code under the terms of the **[GNU GENERAL PUBLIC LICENSE Version 2](http://www.gnu.org/licenses/gpl-2.0.txt)** (GPLv2), so his original work would benefit the whole world and remain free. 
 
-If by any change, you happen to be Nicolas and reading this, or that you know him on person, please contact me. As the orginal author he reserves all the right to take over or take down both the Github fork and the extention on Google Chrome webstore.
+If by any change, you happen to be Nicolas and reading this, or that you know him on person, please contact me. As the orginal author he reserves all the right to take over or take down both the Github fork and the extension on Google Chrome webstore.
 
 Known Issues
 ------------
