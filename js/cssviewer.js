@@ -890,9 +890,11 @@ CSSViewer.prototype.Disable = function()
 {
 	var document = GetCurrentDocument();
 	var block = document.getElementById('CSSViewer_block');
-
-	if (block) {
-		document.body.removeChild(block); 
+        var insertMessage = document.getElementById("cssViewerInsertMessage");
+        
+	if (block || insertMessage) {
+                if(block) document.body.removeChild(block);
+                if(insertMessage) document.body.removeChild(insertMessage);
 		this.RemoveEventListeners();
 
 		return true;
@@ -947,10 +949,10 @@ function cssViewerInsertMessage( msg )
 	oNewP.id                    = 'cssViewerInsertMessage';
 	oNewP.style.backgroundColor = '#b40000';
 	oNewP.style.color           = '#ffffff';
-	oNewP.style.position        = "absolute";
+	oNewP.style.position        = "fixed";
 	oNewP.style.top             = '10px';
 	oNewP.style.left            = '10px';
-	oNewP.style.zIndex          = '100';
+	oNewP.style.zIndex          = '9999';
 	oNewP.style.padding         = '3px';
 
 	// https://github.com/miled/cssviewer/issues/5
