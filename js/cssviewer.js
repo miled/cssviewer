@@ -51,7 +51,7 @@ var CSSViewer_pColorBg = new Array(
 	'background-attachment', 
 	'background-color', 
 	'background-image',
-	'background-position',
+	'bg-position',				//background-position
 	'background-repeat',
 	'color'
 );
@@ -375,7 +375,7 @@ function UpdateColorBg(element)
 	SetCSSPropertyValueIf(element, 'background-color', RGBToHex(GetCSSProperty(element, 'background-color')), GetCSSProperty(element, 'background-color') != 'transparent');
 	SetCSSPropertyIf(element, 'background-attachment', GetCSSProperty(element, 'background-attachment') != 'scroll');
 	SetCSSPropertyValueIf(element, 'background-image', GetFileName(GetCSSProperty(element, 'background-image')), GetCSSProperty(element, 'background-image') != 'none');
-	SetCSSPropertyIf(element, 'background-position'  , GetCSSProperty(element, 'background-position') != '');
+	SetCSSPropertyIf(element, 'bg-position'  , GetCSSProperty(element, 'background-position') != '');
 	SetCSSPropertyIf(element, 'background-repeat'    , GetCSSProperty(element, 'background-repeat') != 'repeat');
 }
 
@@ -746,7 +746,7 @@ function CSSViewer()
 			footer.id = 'CSSViewer_footer';
 
 			//< 
-			footer.appendChild( document.createTextNode('CSSViewer 1.7. keys: [f] Un/Freeze. [c] Css. [Esc] Close.') ); 
+			footer.appendChild( document.createTextNode('CSSViewer keys: [f/space] Un/Freeze. [c] Css. [Esc] Close.') ); 
 			block.appendChild(footer);
 		}
 		
@@ -991,6 +991,9 @@ function cssViewerCopyCssToConsole(type)
 	if( 'simpleCssDefinition' == type ) return console.log( CSSViewer_element_cssDefinition );
 }
 
+
+
+
 /*
 *  Close css viewer on clicking 'esc' key
 *  Freeze css viewer on clicking 'f' key
@@ -1010,7 +1013,7 @@ function CssViewerKeyMap(e) {
 		return;
 
 	// f: Freeze or Unfreeze the css viewer if the cssViewer is enabled
-	if ( e.keyCode === 70 ){
+	if ( e.keyCode === 70 || e.keyCode === 32 ){		// 32 for space bar
 		if ( cssViewer.haveEventListeners ){
 			cssViewer.Freeze();
 		}
@@ -1022,8 +1025,20 @@ function CssViewerKeyMap(e) {
 	// c: Show code css for selected element. 
 	// window.prompt should suffice for now.
 	if ( e.keyCode === 67 ){
-		window.prompt("Simple Css Definition :\n\nYou may copy the code below then hit escape to continue.", CSSViewer_element_cssDefinition);
+		let confirm = window.prompt("Simple Css Definition :\n\nYou may copy the code below then hit escape to continue.", CSSViewer_element_cssDefinition);
+		if(confirm != null){
+			console.log(confirm);
+			navigator.clipboard.writeText(confirm);
+			
+		}
 	}
+}
+
+function createElement(){
+    let el = document.createElement('div');
+    let child = document.createElement('input');
+    el.appendChild(child);
+    return el;
 }
 
 
