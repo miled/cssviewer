@@ -8,12 +8,6 @@ CSSViewer Chrome  Extension 1.7
 Download
 --------
 
-## New GUI
-
-![App Screenshot](https://github.com/Kireet7852/cssviewer/tree/master/img/new-gui.png)
-
-
-
 **CSSViewer** is available at Google Chrome Webstore: https://chrome.google.com/webstore/detail/cssviewer/ggfgijbpiheegefliciemofobhmofgce
 
 How to use
