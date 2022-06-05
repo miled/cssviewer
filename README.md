@@ -10,7 +10,7 @@ Download
 
 ## New GUI
 
-![alt text](https://github.com/Kireet7852/cssviewer/tree/master/img/new-gui.png)
+![alt text](https://raw.githubusercontent.com/Kireet7852/cssviewer/master/img/new-gui.png)
 
 
 
